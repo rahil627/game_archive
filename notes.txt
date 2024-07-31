@@ -1,4 +1,5 @@
 
+# install
 # https://hexdocs.pm/phoenix/installation.html
 scoop install erlang
 scoop install elixir
@@ -12,6 +13,10 @@ mix local.hex
 # install phoenix's app generator
 mix archive.install hex phx_new
 
+
+
+
+# get a server up and runnin'
 # check options before creating a new project
 # (great documentation via cli!)
 # uses postgressql by default
@@ -49,6 +54,81 @@ http://localhost:4000/
 
 
 
+https://thephoenixtutorial.org/book/ch1_from_zero_to_deploy
+  - looks like a simple, one-page-html tutorial..
+
+The Hex packages used by your app are found in the mix. exs file
+
+# installs dependencies
+# (asked when creating a new project)
+mix deps.get
+
+SKIPPING TUTORIAL, just go with ai and make the app
+
+
+
+
+# set up a basic database
+
+# can use this mix script to generate basic schemas (table-like data entities)
+mix phx.gen.schema Thing things field_name:type name2:type2
+# generates things.exs and file that creates the table (Migrations.CreateThings)
+
+# but i think you eventually have to edit the generated code to map relationships beyond simple foreign keys (field_name:reference:schema)
+
+# TODO: do some reading up on ecto
+# https://hexdocs.pm/ecto/Ecto.Schema.html#content
+# https://hexdocs.pm/ecto/Ecto.Schema.html#has_many/3-has_many-has_one-through
+# By default, a schema will automatically generate a primary key which is named id and of type :integer
+# array in ecto = list in elixir (maybe ecto is from erlang?)
+# :map
+
+# relations
+# has_many(t)
+# has_one(t)
+# many_to_many(t)
+
+
+mix phx.gen.schema User users username:string:unique email:string:unique password_hash:string
+# created_at:utc_datetime updated_at:utc_datetime
+# NOTE: already generated this.. check it out!
+
+mix phx.gen.schema Game games title:string alt_titles:array:string makers:array:references:makers release_year:integer genres:array:genres tags:array:tags short_description:string countries:array:references:countries
+# can you do array of references? (table id)
+
+mix phx.gen.schema Maker makers name:string job:references:jobs
+mix phx.gen.schema Job jobs name:string
+
+mix phx.gen.schema Country countries name:string
+mix phx.gen.schema Genre genres name:string
+mix phx.gen.schema Tag tags name:string
+
+# ratings...
+# game engines / tech
+# languages?
+
+
+# TODO: should all strings be unique?
+
+# alt_names:array:string
+mix phx.gen.schema Game games
+
+# genre vs tag?
+# itch.io uses tag
+# older engines use genre
+
+# can add and think about later
+# but be warned, updating schemas isn't so simple :/
+mix phx.gen.schema Media.Review reviews user_id:references:users game_id:references:games rating:integer review_text:text created_at:utc_datetime updated_at:utc_datetime
+mix phx.gen.schema Media.Watchlist watchlists user_id:references:users game_id:references:games created_at:utc_datetime updated_at:utc_datetime
+
+# much later
+mix phx.gen.schema Social.Follower followers follower_id:references:users followed_id:references:users created_at:utc_datetime updated_at:utc_datetime
+
+
+
+
+
 
 
 prompt (ms copilot):
@@ -80,6 +160,8 @@ cd my_movie_platform
 2. Define Your Data Models
 Create a Movie schema:
 mix phx.gen.schema Movie movies title:string release_year:integer genre:string
+
+mix phx.gen.schema Game games title:string release_year:integer genre:string
 
 Create a User schema (for authentication):
 mix phx.gen.schema User users email:string password_hash:string
