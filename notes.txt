@@ -20,7 +20,21 @@ mix archive.install hex phx_new
 # --no-live just comments out live-view-related stuff, so uncomment it when it's needed
 mix help phx.new
 
-mix phx.new my-project --no-live
+// mix phx.new my_project --adapter bandit --no-live
+Configure your database in config/dev.exs and run:
+
+cd my_project
+
+$ mix ecto.create
+
+Start your Phoenix app with:
+
+$ mix phx.server
+
+You can also run your app inside IEx (Interactive Elixir) as:
+
+$ iex -S mix phx.server
+
 
 
 
