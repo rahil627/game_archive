@@ -1,3 +1,31 @@
+
+# https://hexdocs.pm/phoenix/installation.html
+scoop install erlang
+scoop install elixir
+scoop install postgresql
+
+# Run run 'pg_ctl start' or 'pg_ctl stop' to start and stop the database or register it as a service by running 'pg_ctl register -N PostgreSQL' from an elevated shell.
+
+# install elixir's package manager
+mix local.hex
+
+# install phoenix's app generator
+mix archive.install hex phx_new
+
+# check options before creating a new project
+# (great documentation via cli!)
+# uses postgressql by default
+# can try bandit http server over the default cowboy
+#   - cowboy is written in erlang, bandit was written specifically for plug, in elixir, and therefore phoenix, ridding some unused bloat
+# --no-live just comments out live-view-related stuff, so uncomment it when it's needed
+mix help phx.new
+
+mix phx.new my-project --no-live
+
+
+
+
+
 prompt (ms copilot):
 make me a web-site similar to letterboxd using the phoenix framework (elixir)
 
