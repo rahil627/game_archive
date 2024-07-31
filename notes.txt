@@ -72,13 +72,16 @@ SKIPPING TUTORIAL, just go with ai and make the app
 
 # can use this mix script to generate basic schemas (table-like data entities)
 mix phx.gen.schema Thing things field_name:type name2:type2
-# generates things.exs and file that creates the table (Migrations.CreateThings)
+# generates the schema file and a file that contains a script to create the table:
+# creating lib/game_archive/thing.ex
+# creating priv/repo/migrations/20240731053228_create_things.exs
 
 # but i think you eventually have to edit the generated code to map relationships beyond simple foreign keys (field_name:reference:schema)
 
 # TODO: do some reading up on ecto
 # https://hexdocs.pm/ecto/Ecto.Schema.html#content
 # https://hexdocs.pm/ecto/Ecto.Schema.html#has_many/3-has_many-has_one-through
+# some notes:
 # By default, a schema will automatically generate a primary key which is named id and of type :integer
 # array in ecto = list in elixir (maybe ecto is from erlang?)
 # :map
