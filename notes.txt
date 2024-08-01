@@ -2,13 +2,19 @@
 
 # set up a basic database
 
-# can use this mix script to generate basic schemas (table-like data entities)
-mix phx.gen.schema Thing things field_name:type name2:type2
+# can use this mix script to generate basic schemas (table-like data entities?)
+mix phx.gen.schema Thing things field_name:type field_name2:type
 # generates the schema file and a file that contains a script to create the table:
 # creating lib/game_archive/thing.ex
 # creating priv/repo/migrations/20240731053228_create_things.exs
 
 # but i think you eventually have to edit the generated code to map relationships beyond simple foreign keys (field_name:reference:schema)
+
+# then "migrate" the data? (create tables)
+# ensure db is connected
+mix ecto.migrate
+
+
 
 # TODO: do some reading up on ecto
 # https://hexdocs.pm/ecto/Ecto.Schema.html#content
@@ -23,37 +29,36 @@ mix phx.gen.schema Thing things field_name:type name2:type2
 # has_one(t)
 # many_to_many(t)
 
+https://hexdocs.pm/ecto/Ecto.Schema.html#timestamps/1
+# timestamps() is a macro that generates inserted_at and updated_at fields
+# this was added automatically when i ran it:
+# timestamps(type: :utc_datetime)
+
 
 mix phx.gen.schema User users username:string:unique email:string:unique password_hash:string
-# created_at:utc_datetime updated_at:utc_datetime
-# NOTE: already generated this.. check it out!
 
-mix phx.gen.schema Game games title:string alt_titles:array:string makers:array:references:makers release_year:integer genres:array:genres tags:array:tags short_description:string countries:array:references:countries
-# can you do array of references? (table id)
+mix phx.gen.schema Game games title:string alt_titles:array:string makers:array:string studios:array:string countries:array:string languages:array:string release_year:integer devices:array:string tags:array:string tech_tags:array:string short_description:string
+# skip job positions for now
+# maybe can cache average rating in db later..
+# note: title, maker names, studios can have the same name
+# note: used plural words for arrays (just made this naming convention up!)
+# tags are similar to itch.io's tags, where a tag can be anything: game system, game style
+# TODO: use tags for genre, tech, game system?
+# genre yes, tech tags, not so sure.. and what about mods?
+# TODO: need to figure-out 'n set relations for many of these fileds
 
-mix phx.gen.schema Maker makers name:string job:references:jobs
-mix phx.gen.schema Job jobs name:string
+# keep it simple for now: and use a single table design
+# who knows how contemporary database magic works!
+# countries, languages, etc. can be it's own table, but.. meh, not so sure about multiple joins
 
-mix phx.gen.schema Country countries name:string
-mix phx.gen.schema Genre genres name:string
-mix phx.gen.schema Tag tags name:string
+# how to handle same titles, maker names, etc.?
+# should all strings be unique?
+# nah, they'll have a unique id, just use that to differentiate
 
-# ratings...
-# game engines / tech
-# languages?
-
-
-# TODO: should all strings be unique?
-
-# alt_names:array:string
-mix phx.gen.schema Game games
-
-# genre vs tag?
-# itch.io uses tag
-# older engines use genre
-
-# can add and think about later
+# can add and think about more later
 # but be warned, updating schemas isn't so simple :/
+
+# later
 mix phx.gen.schema Media.Review reviews user_id:references:users game_id:references:games rating:integer review_text:text created_at:utc_datetime updated_at:utc_datetime
 mix phx.gen.schema Media.Watchlist watchlists user_id:references:users game_id:references:games created_at:utc_datetime updated_at:utc_datetime
 
