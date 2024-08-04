@@ -35,7 +35,7 @@ https://hexdocs.pm/ecto/Ecto.Schema.html#timestamps/1
 # timestamps(type: :utc_datetime)
 
 
-mix phx.gen.schema User users username:string:unique email:string:unique password_hash:string
+# NOTE: phx.gen.auth generates a users table for you
 
 mix phx.gen.schema Game games title:string alt_titles:array:string makers:array:string studios:array:string countries:array:string languages:array:string release_year:integer devices:array:string tags:array:string tech_tags:array:string short_description:string
 # skip job positions for now
@@ -65,6 +65,20 @@ mix phx.gen.schema Media.Watchlist watchlists user_id:references:users game_id:r
 # much later
 mix phx.gen.schema Social.Follower followers follower_id:references:users followed_id:references:users created_at:utc_datetime updated_at:utc_datetime
 
+
+
+
+
+# generate authentication code
+# NOTE: since this is simply generated, it's upto you to port new generated code
+mix phx.gen.auth Accounts User users
+# y to liveview
+mix deps.get
+mix ecto migrate
+
+# can test it
+# WARNING: will build/compile it
+# mix test
 
 
 
