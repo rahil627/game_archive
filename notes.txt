@@ -101,11 +101,10 @@ cd my_movie_platform
 Create a Movie schema:
 mix phx.gen.schema Movie movies title:string release_year:integer genre:string
 
-mix phx.gen.schema Game games title:string release_year:integer genre:string
-
 Create a User schema (for authentication):
 mix phx.gen.schema User users email:string password_hash:string
 
+# TODO: STOPPED HERE
 3. Implement User Authentication
 Set up authentication using phx.gen.auth:
 mix phx.gen.auth Accounts User users
