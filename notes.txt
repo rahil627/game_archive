@@ -2,20 +2,6 @@
 
 # set up a basic database
 
-# can use this mix script to generate basic schemas (table-like data entities?)
-mix phx.gen.schema Thing things field_name:type field_name2:type
-# generates the schema file and a file that contains a script to create the table:
-# creating lib/game_archive/thing.ex
-# creating priv/repo/migrations/20240731053228_create_things.exs
-
-# but i think you eventually have to edit the generated code to map relationships beyond simple foreign keys (field_name:reference:schema)
-
-# then "migrate" the data? (create tables)
-# ensure db is connected
-mix ecto.migrate
-
-
-
 # TODO: do some reading up on ecto
 # https://hexdocs.pm/ecto/Ecto.Schema.html#content
 # https://hexdocs.pm/ecto/Ecto.Schema.html#has_many/3-has_many-has_one-through
@@ -83,6 +69,29 @@ mix ecto migrate
 
 
 
+# create views/contexts and controllers
+
+# similar to https://letterboxd.com/films/
+# no, i never use that page...
+# https://letterboxd.com/film/
+mix phx.gen.html Games Game games --no-schema
+
+# TODO: later
+# similar to https://letterboxd.com/lists/
+# no, i never use that page..
+# https://letterboxd.com/list/
+mix phx.gen.html Lists List lists --no-schema
+
+
+
+add the resource to your browser scope in lib/game_archive_web/router.ex:
+
+    resources "/games", GameController
+
+Add routes for movies in lib/my_movie_platform_web/router.ex.
+
+
+
 
 
 prompt (ms copilot):
@@ -118,7 +127,6 @@ mix phx.gen.schema Movie movies title:string release_year:integer genre:string
 Create a User schema (for authentication):
 mix phx.gen.schema User users email:string password_hash:string
 
-# TODO: STOPPED HERE
 3. Implement User Authentication
 Set up authentication using phx.gen.auth:
 mix phx.gen.auth Accounts User users
@@ -128,11 +136,14 @@ Create a controller for movies:
 mix phx.gen.html Movies Movie movies title:string release_year:integer genre:string
 
 Add routes for movies in lib/my_movie_platform_web/router.ex.
+
 5. Implement Movie Listings and Details
 Create views and templates for movie listings and details.
 Fetch movie data from your database and display it on the website.
+
 6. User Reviews and Ratings
 Create a Review schema (with fields like user_id, movie_id, rating, and comment).
+
 Implement CRUD operations for reviews.
 7. Lists and Collections
 Create a List schema (with fields like user_id, name, and description).
