@@ -74,6 +74,8 @@ mix ecto migrate
 # similar to https://letterboxd.com/films/
 # no, i never use that page...
 # https://letterboxd.com/film/
+# TODO: maybe should've used --web namespace
+# in case of multiple "contexts" for the same schema
 mix phx.gen.html Games Game games --no-schema
 
 # TODO: later
@@ -88,7 +90,19 @@ add the resource to your browser scope in lib/game_archive_web/router.ex:
 
     resources "/games", GameController
 
-Add routes for movies in lib/my_movie_platform_web/router.ex.
+add it under these lines:
+  scope "/", GameArchiveWeb do
+    pipe_through :browser
+
+add some routes?
+
+
+
+# make some views 'n templates
+TODO:
+time to do some reading..
+https://hexdocs.pm/phoenix/1.4.3/adding_pages.html#content
+
 
 
 
@@ -137,6 +151,7 @@ mix phx.gen.html Movies Movie movies title:string release_year:integer genre:str
 
 Add routes for movies in lib/my_movie_platform_web/router.ex.
 
+TODO: stopped here
 5. Implement Movie Listings and Details
 Create views and templates for movie listings and details.
 Fetch movie data from your database and display it on the website.

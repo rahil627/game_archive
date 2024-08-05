@@ -4,11 +4,19 @@ defmodule GameArchiveWeb.GameController do
   alias GameArchive.Games
   alias GameArchive.Games.Game
 
+  # pages
   def index(conn, _params) do
     games = Games.list_games()
     render(conn, :index, games: games)
   end
 
+  def show(conn, %{"id" => id}) do
+    game = Games.get_game!(id)
+    render(conn, :show, game: game)
+  end
+
+
+  # change schema functions
   def new(conn, _params) do
     changeset = Games.change_game(%Game{})
     render(conn, :new, changeset: changeset)
@@ -26,10 +34,6 @@ defmodule GameArchiveWeb.GameController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    game = Games.get_game!(id)
-    render(conn, :show, game: game)
-  end
 
   def edit(conn, %{"id" => id}) do
     game = Games.get_game!(id)
