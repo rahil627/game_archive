@@ -2,7 +2,7 @@ defmodule GameArchiveWeb.GameController do
   use GameArchiveWeb, :controller
 
   alias GameArchive.Games
-  alias GameArchive.Games.Game
+  alias GameArchive.Game
 
   # pages
   def index(conn, _params) do

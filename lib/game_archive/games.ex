@@ -4,9 +4,9 @@ defmodule GameArchive.Games do
   """
 
   import Ecto.Query, warn: false
-  alias GameArchive.Repo
 
-  alias GameArchive.Games.Game
+  alias GameArchive.Repo
+  alias GameArchive.Game
 
   @doc """
   Returns the list of games.
