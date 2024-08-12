@@ -2,28 +2,15 @@
 
 # set up a basic database
 
-# TODO: do some reading up on ecto
-# https://hexdocs.pm/ecto/Ecto.Schema.html#content
-# https://hexdocs.pm/ecto/Ecto.Schema.html#has_many/3-has_many-has_one-through
-# some notes:
-# By default, a schema will automatically generate a primary key which is named id and of type :integer
-# array in ecto = list in elixir (maybe ecto is from erlang?)
-# :map
-
-# relations
-# has_many(t)
-# has_one(t)
-# many_to_many(t)
-
-https://hexdocs.pm/ecto/Ecto.Schema.html#timestamps/1
-# timestamps() is a macro that generates inserted_at and updated_at fields
-# this was added automatically when i ran it:
-# timestamps(type: :utc_datetime)
 
 
 # NOTE: phx.gen.auth generates a users table for you
 
+# perfect docs
+mix help phx.gen.schema
+
 mix phx.gen.schema Game games title:string alt_titles:array:string makers:array:string studios:array:string countries:array:string languages:array:string release_year:integer devices:array:string tags:array:string tech_tags:array:string short_description:string
+
 # skip job positions for now
 # maybe can cache average rating in db later..
 # note: title, maker names, studios can have the same name
@@ -31,7 +18,11 @@ mix phx.gen.schema Game games title:string alt_titles:array:string makers:array:
 # tags are similar to itch.io's tags, where a tag can be anything: game system, game style
 # TODO: use tags for genre, tech, game system?
 # genre yes, tech tags, not so sure.. and what about mods?
+
 # TODO: need to figure-out 'n set relations for many of these fileds
+# has_many(t)
+# has_one(t)
+# many_to_many(t)
 
 # keep it simple for now: and use a single table design
 # who knows how contemporary database magic works!
@@ -44,7 +35,11 @@ mix phx.gen.schema Game games title:string alt_titles:array:string makers:array:
 # can add and think about more later
 # but be warned, updating schemas isn't so simple :/
 
-# later
+
+# TODO: lists schema
+mix phx.gen.schema List lists user_id:references:users games:array:int
+
+# schemas for later features
 mix phx.gen.schema Media.Review reviews user_id:references:users game_id:references:games rating:integer review_text:text created_at:utc_datetime updated_at:utc_datetime
 mix phx.gen.schema Media.Watchlist watchlists user_id:references:users game_id:references:games created_at:utc_datetime updated_at:utc_datetime
 
@@ -58,7 +53,7 @@ mix phx.gen.schema Social.Follower followers follower_id:references:users follow
 # generate authentication code
 # NOTE: since this is simply generated, it's upto you to port new generated code
 mix phx.gen.auth Accounts User users
-# y to liveview
+# enter y for the liveview version
 mix deps.get
 mix ecto migrate
 
@@ -78,7 +73,8 @@ mix ecto migrate
 # in case of multiple "contexts" for the same schema
 mix phx.gen.html Games Game games --no-schema
 
-# TODO: later
+# TODO: later, but def the most important feature, even more than reviews
+# NOTE: create schema first, no clue what this would generate
 # similar to https://letterboxd.com/lists/
 # no, i never use that page..
 # https://letterboxd.com/list/
@@ -99,11 +95,32 @@ add some routes?
 
 
 # make some views 'n templates
-TODO:
-time to do some reading..
+TODO: time to do some reading..
 https://hexdocs.pm/phoenix/1.4.3/adding_pages.html#content
+  - quickly went through this, shows creating the :show action / page, which is already auto-generated
 
 
+error:
+GameArchive.Games.Game.__struct__/1 is undefined, cannot expand struct GameArchive.Games.Game. Make sure the struct name is correct. If the struct name exists and is correct but it still cannot be found, you likely have cyclic module usage in your code
+
+solution:
+alias GameArchive.Game # NOT: GameArchive.Games.Game
+
+
+
+TODO: stopped here
+error:
+duplicate table
+
+solution:
+rm ./build -force
+build app again
+
+
+
+
+https://hexdocs.pm/phoenix/1.7.14/contexts.html#thinking-about-contexts
+  - TODO: read this
 
 
 
