@@ -9,3 +9,72 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+
+# LEARN HOW TO ELIXIR HERE!
+
+# TODO: it's pretty silly to generate data using elixir. Should be a seperate cli program to handle this..
+alias GameArchive.Game
+alias GameArchive.Games
+alias GameArchive.Repo
+alias Faker
+
+
+# for reference
+# schema "games" do
+#   field :title, :string
+#   field :alt_titles, {:array, :string}
+#   field :makers, {:array, :string}
+#   field :studios, {:array, :string}
+#   field :countries, {:array, :string}
+#   field :languages, {:array, :string}
+#   field :release_year, :integer
+#   field :genres, {:array, :string}
+#   field :tags, {:array, :string}
+#   field :short_description, :string
+#   field :tech_tags, {:array, :string}
+
+#   timestamps(type: :utc_datetime)
+# end
+
+
+# manually test one for now..
+
+# example
+# def build_session_token(user) do
+#   token = :crypto.strong_rand_bytes(@rand_size)
+#   {token, %UserToken{token: token, context: "session", user_id: user.id}}
+# end
+
+# def gen_game do # NOTE: can't define a function outside a module!
+game = %Game { # this must be a tuple.. {key: value} NOTE: syntax requires the space
+  title: "test",
+  alt_titles: ["string 1", "string 2"], # i think "arrays" are just lists in elixir..
+  makers: ["string 1", "string 2"],
+  studios: ["string 1", "string 2"],
+  countries: ["string 1", "string 2"],
+  languages: ["string 1", "string 2"],
+  release_year: 1999,
+  genres: ["string 1", "string 2"],
+  tags: ["string 1", "string 2"],
+  short_description: "this is a description",
+  tech_tags: ["string 1", "string 2"],
+}
+
+# generates this sql
+# INSERT INTO "games" ("title","tags","alt_titles","makers","studios","countries","languages","release_year","genres","short_description","tech_tags","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING "id" ["test", ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], 1999, ["string 1", "string 2"], "this is a description", ["string 1", "string 2"], ~U[2024-08-12 09:13:45Z], ~U[2024-08-12 09:13:45Z]]
+
+
+
+# TODO: generate many using faker lib
+
+
+Repo.insert!(game)
+
+# game2 = Games.create_game() # TODO: what are attrs?
+# TODO: error:
+
+# Repo.insert!(game2)
+
+# Games.create_game() # Repo.insert!(game)
+# Games.update_game(game, )
