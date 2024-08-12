@@ -1,9 +1,10 @@
+# TODO: rename this to Archive?
 defmodule GameArchive.Games do
   @moduledoc """
   The Games context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query, warn: false # the sql query dsl
 
   alias GameArchive.Repo
   alias GameArchive.Game
@@ -18,7 +19,8 @@ defmodule GameArchive.Games do
 
   """
   def list_games do
-    raise "TODO"
+    Repo.all(Game) # TODO: i think this selects all by default
+    # raise "TODO"
   end
 
   @doc """
@@ -32,7 +34,12 @@ defmodule GameArchive.Games do
       %Game{}
 
   """
-  def get_game!(id), do: raise "TODO"
+  def get_game!(id) do
+    # Repo.one(from g in Game, where: game_id = id) # TODO: select all when no select: ?
+    # Repo.one(Game, id: id)
+    Repo.get(Game, id: id)
+    # raise "TODO"
+  end
 
   @doc """
   Creates a game.
@@ -47,7 +54,9 @@ defmodule GameArchive.Games do
 
   """
   def create_game(attrs \\ %{}) do
-    raise "TODO"
+    %Game{}
+    |> Game.changeset(attrs)
+    |> Repo.insert()
   end
 
   @doc """
@@ -63,7 +72,7 @@ defmodule GameArchive.Games do
 
   """
   def update_game(%Game{} = game, attrs) do
-    raise "TODO"
+    Repo.insert_or_update(game, attrs)
   end
 
   @doc """
@@ -79,7 +88,7 @@ defmodule GameArchive.Games do
 
   """
   def delete_game(%Game{} = game) do
-    raise "TODO"
+    Repo.delete(game)
   end
 
   @doc """
