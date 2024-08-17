@@ -34,8 +34,8 @@ defmodule GameArchive.Games do # TODO: rename this to Archive?
   """
   def get_game!(id) do
     # Repo.one(from g in Game, where: game_id = id) # TODO: select all when no select: ?
-    # Repo.one(Game, id: id)
-    Repo.get(Game, id: id)
+    # Repo.one(Game, id)
+    Repo.get(Game, id)
   end
 
   @doc """
