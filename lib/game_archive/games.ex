@@ -1,5 +1,4 @@
-# TODO: rename this to Archive?
-defmodule GameArchive.Games do
+defmodule GameArchive.Games do # TODO: rename this to Archive?
   @moduledoc """
   The Games context.
   """
@@ -20,7 +19,6 @@ defmodule GameArchive.Games do
   """
   def list_games do
     Repo.all(Game) # TODO: i think this selects all by default
-    # raise "TODO"
   end
 
   @doc """
@@ -38,7 +36,6 @@ defmodule GameArchive.Games do
     # Repo.one(from g in Game, where: game_id = id) # TODO: select all when no select: ?
     # Repo.one(Game, id: id)
     Repo.get(Game, id: id)
-    # raise "TODO"
   end
 
   @doc """
@@ -72,7 +69,9 @@ defmodule GameArchive.Games do
 
   """
   def update_game(%Game{} = game, attrs) do
-    Repo.insert_or_update(game, attrs)
+    game
+      |> Game.changeset(attrs)
+      |> Repo.update()
   end
 
   @doc """
