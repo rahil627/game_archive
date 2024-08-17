@@ -24,8 +24,8 @@ defmodule GameArchiveWeb.Router do
     get "/", PageController, :home
 
     # i added these to match phx.gen.html Games
-    get "/game", GameController, :index # :index was auto-gen'd
-    get "/game/:id", GameController, :show # :show was also auto-gen'd
+    get "/games", GameController, :index # :index was auto-gen'd, list_games
+    get "/game/:id", GameController, :show # :show was also auto-gen'd, get_game!
     # get "/games", GameController, :show_all
     resources "/games", GameController
   end
