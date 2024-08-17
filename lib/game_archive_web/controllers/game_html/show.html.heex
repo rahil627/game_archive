@@ -1,5 +1,5 @@
 <.header>
-  Game <%= @game.id %>
+  Game <%= @game.title %>
   <:subtitle>This is a game record from your database.</:subtitle>
   <:actions>
     <.link href={~p"/games/#{@game}/edit"}>
@@ -9,6 +9,10 @@
 </.header>
 
 <.list>
+  <:item title="id"><%= @game.id %></:item>
+  <:item title="title"><%= @game.title %></:item>
+  <:item title="alt_title"><%= @game.alt_titles %></:item>
+  <:item title="makers"><%= @game.makers %></:item>
 </.list>
 
 <.back navigate={~p"/games"}>Back to games</.back>
