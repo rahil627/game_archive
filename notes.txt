@@ -162,7 +162,10 @@ are schemas supposed to have a field with a ":col" key?
 
 posted help on forums:
 https://elixirforum.com/t/generated-code-raises-keyerror-in-core-components-ex-for-item-and-col/65538
-
+  - check the compiler warnings instead of errors on the web-site
+  - it tells you that the html.heex files are missing stuff
+    - <.table> requires at least one <:col></:col>
+    - <.list> requires at least one <:item></:item>
 
 
 https://hexdocs.pm/phoenix/1.7.14/contexts.html#thinking-about-contexts
@@ -178,18 +181,17 @@ https://hexdocs.pm/phoenix/1.7.14/contexts.html#thinking-about-contexts
 phx.gen.html Lists List lists
 #  - follow instructions provided by cli
 
-# TODO: design and gen schema
 mix phx.gen.schema List lists user_id:references:users title:string description:string
 # TODO: add comments later
 
 # add relations after generating
-has_many :comments, Comment
-# TODO: finish html templates in order to compile
+has_many :games, Game
 
 # TODO: test create/edit/delete lists
+# FAIL
+# maybe need to log in?
 
-
-
+# TODO: need a dynamic form to create/edit a list
 
 
 
@@ -199,16 +201,22 @@ has_many :comments, Comment
 
 
 # add search
+
+# NOT SIMPLE
+
 postgres provides a "full-text" search capability
 https://hevodata.com/blog/postgresql-full-text-search-setup/
+
 https://peterullrich.com/complete-guide-to-full-text-search-with-postgres-and-ecto#the-short-solution
   - copy/pasta this bit
+
 https://elixirforum.com/t/search-bar-feature-phoenix-searching/12277/4
   - and this bit
 
 https://elixirforum.com/t/real-time-search-with-phoenix-liveview-and-tailwind/53761
   - real-time search!
     - works incredibly well!!
+  - but not simple!
 
 letterboxd provides option to select category/column to search:
 all
