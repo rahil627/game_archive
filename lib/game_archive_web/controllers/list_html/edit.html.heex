@@ -1,0 +1,8 @@
+<.header>
+  Edit List <%= @list.id %>
+  <:subtitle>Use this form to manage list records in your database.</:subtitle>
+</.header>
+
+<.list_form changeset={@changeset} action={~p"/lists/#{@list}"} />
+
+<.back navigate={~p"/lists"}>Back to lists</.back>

@@ -43,6 +43,8 @@ defmodule GameArchiveWeb.Router do
     # DELETE /users/:id => :delete
 
     get "/games/:id/:title", GameController, :show # with title slug
+
+   resources "/lists", ListController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,14 @@
+<.header>
+  List <%= @list.id %>
+  <:subtitle>This is a list record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/lists/#{@list}/edit"}>
+      <.button>Edit list</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+</.list>
+
+<.back navigate={~p"/lists"}>Back to lists</.back>
