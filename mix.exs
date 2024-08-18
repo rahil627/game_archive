@@ -32,6 +32,7 @@ defmodule GameArchive.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # used by basic app code gen
       {:pbkdf2_elixir, "~> 2.0"},
       {:phoenix, "~> 1.7.14"},
       {:phoenix_ecto, "~> 4.5"},
@@ -60,7 +61,14 @@ defmodule GameArchive.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:faker, "~> 0.18", only: [:test, :dev]} # WARNING: last version is pretty old
+
+      # to gen fake data
+      {:faker, "~> 0.18", only: [:test, :dev]}, # WARNING: last version is pretty old
+
+      # to fetch real data
+      {:igdb, "~> 1.0", only: [:test, :dev]} # WARNING: last version from 2019
+
+      # to scrape data from other sites?
     ]
   end
 

@@ -86,6 +86,24 @@ defmodule GameArchive.GameMaker do
       short_description: Faker.Lorem.sentence(5..10),
       tech_tags: [Faker.Lorem.word(), Faker.Lorem.word()],
     }
+
+    # igdb is a good start
+    # do once, then sync onward
+    def fetch_games_from_igdb do
+      # TODO: vs use ruby 'n run ruby script as mix task
+      # Igdb.Api.auth_headers("")
+      raise "TODO"
+    end
+
+    def fetch_game_lists_from_igdb do
+      raise "TODO"
+    end
+
+    # not so sure about the quality of these..
+    def fetch_game_reviews_from_steam do
+      # https://github.com/israel-dryer/Steam-Game-Review-Scraper
+      raise "TODO"
+    end
  end
 
 end
