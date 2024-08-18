@@ -3,7 +3,7 @@ defmodule GameArchive.List do
   import Ecto.Changeset
 
   schema "lists" do
-    field :user_id, :id
+    field :user_id, :id # NOTE: reference created in migration file
     field :title, :string
     field :description, :string
 
