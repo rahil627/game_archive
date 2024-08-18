@@ -27,11 +27,12 @@ defmodule GameArchiveWeb.Router do
     # i added these to match phx.gen.html Games
     # get "/games", GameController, :index # :index was auto-gen'd, list_games
     # get "/game/:id", GameController, :show # :show was also auto-gen'd, get_game!
-    # get "/games", GameController, :show_all
 
     # NOTE: this is a powerful macro that generates a lot of RESTful routes:
     # https://hexdocs.pm/phoenix/1.7.14/Phoenix.Router.html#resources/4
     resources "/games", GameController
+    # by default, creates all of these:
+    # can use :only option to limit it
     # GET /users => :index
     # GET /users/new => :new
     # POST /users => :create
