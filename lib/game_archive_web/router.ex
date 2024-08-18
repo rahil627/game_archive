@@ -41,6 +41,8 @@ defmodule GameArchiveWeb.Router do
     # PATCH /users/:id => :update
     # PUT /users/:id => :update
     # DELETE /users/:id => :delete
+
+    get "/games/:id/:title", GameController, :show # with title slug
   end
 
   # Other scopes may use custom stacks.
