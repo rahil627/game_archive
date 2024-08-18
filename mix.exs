@@ -72,6 +72,7 @@ defmodule GameArchive.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      rebuild: ["delete_build"], # TODO: does it mix/build by default?
       deploy: ["start_db", "phx.server"], # TODO: vs run
       setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
