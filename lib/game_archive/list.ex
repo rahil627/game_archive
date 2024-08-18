@@ -7,6 +7,11 @@ defmodule GameArchive.List do
     field :title, :string
     field :description, :string
 
+    has_many :games, Game
+    # has_many :tags, {"posts_tags", Tag}
+    # has_many :comments, Comment
+
+
     timestamps(type: :utc_datetime)
   end
 
