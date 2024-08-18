@@ -101,7 +101,7 @@ alias GameArchive.Repo
 alias GameArchive.GameMaker
 # alias GameArchive.Games
 
-for n <- 1..10 do
+for _n <- 1..10 do
   Repo.insert!(GameMaker.gen_game())
 end
 
