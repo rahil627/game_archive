@@ -8,6 +8,9 @@
 </.header>
 
 <.table id="lists" rows={@lists} row_click={&JS.navigate(~p"/lists/#{&1}")}>
+  <:col :let={list} label="id"><%= list.id %></:col>
+  <:col :let={list} label="title"><%= list.title %></:col>
+
   <:action :let={list}>
     <div class="sr-only">
       <.link navigate={~p"/lists/#{list}"}>Show</.link>

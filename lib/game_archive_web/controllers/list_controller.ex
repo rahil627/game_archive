@@ -2,7 +2,7 @@ defmodule GameArchiveWeb.ListController do
   use GameArchiveWeb, :controller
 
   alias GameArchive.Lists
-  alias GameArchive.Lists.List
+  alias GameArchive.List
 
   def index(conn, _params) do
     lists = Lists.list_lists()
