@@ -6,6 +6,13 @@
   <.input label="title" field={f[:title]} />
   <.input label="description" field={f[:description]} />
   <%# TODO: should be able to add as many things to the list %>
+  <%# https://kobrakai.de/kolumne/one-to-many-liveview-form %>
+  <%# NOT SIMPLE! %>
+  <%!--
+  <%= for g <- f[:games] do %>
+    <.input label="game title" field={g[:title]} />
+  <% end %>
+   --%>
 
   <:actions>
     <.button>Save List</.button>
