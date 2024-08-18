@@ -99,7 +99,8 @@ defmodule GameArchive.Games do # TODO: rename this to Archive?
       %Todo{...}
 
   """
-  def change_game(%Game{} = game, _attrs \\ %{}) do
-    raise "TODO"
+  def change_game(%Game{} = game, attrs \\ %{}) do
+    game
+    |> Game.changeset(attrs)
   end
 end
