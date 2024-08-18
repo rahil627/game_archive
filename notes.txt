@@ -1,5 +1,16 @@
 
 
+ideally:
+no javascript! just plain old html
+very basic css
+and then phoenix/elixir back-end
+think: craigslist, with some cute css, and beautiful phoenix/elixir handling everything
+
+
+
+# just following the simple steps that ai provided to make an app using phoenix:
+
+
 # set up a basic database
 
 
@@ -118,9 +129,105 @@ build app again
 
 
 
+TODO: more errors:
+
+error:
+http://localhost:4000/game/:1
+
+Ecto.QueryError at GET /game/:1
+deps/ecto/lib/ecto/repo/queryable.ex:477: invalid keyword list in query:
+
+from g0 in GameArchive.Game,
+  where: g0.id == ^[{:id, ":1"}],
+    select: g0
+
+    keyword lists are only allowed at the top level of where
+
+
+solution:
+?? wtf, Game.get(id) generated it!
+
+
+
+error:
+http://localhost:4000/games
+
+KeyError at GET /games
+
+key :col not found in: %{...lists my game tables..}
+
+
+solution:
+are schemas supposed to have a field with a ":col" key?
+
+posted help on forums:
+https://elixirforum.com/t/generated-code-raises-keyerror-in-core-components-ex-for-item-and-col/65538
+
+
 
 https://hexdocs.pm/phoenix/1.7.14/contexts.html#thinking-about-contexts
   - TODO: read this
+
+
+
+
+
+
+
+# add lists
+phx.gen.html Lists List lists
+#  - follow instructions provided by cli
+
+# TODO: design and gen schema
+mix phx.gen.schema List lists user_id:references:users title:string description:string
+# TODO: add comments later
+
+# add relations after generating
+has_many :comments, Comment
+# TODO: finish html templates in order to compile
+
+# TODO: test create/edit/delete lists
+
+
+
+
+
+
+
+
+
+
+
+# add search
+postgres provides a "full-text" search capability
+https://hevodata.com/blog/postgresql-full-text-search-setup/
+https://peterullrich.com/complete-guide-to-full-text-search-with-postgres-and-ecto#the-short-solution
+  - copy/pasta this bit
+https://elixirforum.com/t/search-bar-feature-phoenix-searching/12277/4
+  - and this bit
+
+https://elixirforum.com/t/real-time-search-with-phoenix-liveview-and-tailwind/53761
+  - real-time search!
+    - works incredibly well!!
+
+letterboxd provides option to select category/column to search:
+all
+films
+lists
+  - original lists
+cast, crew, studios
+tag
+...
+full-text search
+  - sounds advanced..
+
+
+
+
+
+
+
+
 
 
 
@@ -168,23 +275,28 @@ mix phx.gen.html Movies Movie movies title:string release_year:integer genre:str
 
 Add routes for movies in lib/my_movie_platform_web/router.ex.
 
-TODO: stopped here
 5. Implement Movie Listings and Details
 Create views and templates for movie listings and details.
 Fetch movie data from your database and display it on the website.
 
+TODO: skipped this, but should come back
 6. User Reviews and Ratings
 Create a Review schema (with fields like user_id, movie_id, rating, and comment).
-
 Implement CRUD operations for reviews.
+
+TODO: currently here
 7. Lists and Collections
 Create a List schema (with fields like user_id, name, and description).
 Allow users to create and manage lists (e.g., watchlist, favorites).
+
 8. Search and Filtering
 Implement search functionality for movies.
 Add filters (by genre, release year, etc.).
+
+# NOPE, skip this
 9. User Recommendations
 Use collaborative filtering or content-based recommendation algorithms to suggest movies to users.
+
 10. Styling and Responsive Design
 Use CSS (or a front-end framework like Tailwind CSS) to style your website.
 Ensure it looks good on different devices.
