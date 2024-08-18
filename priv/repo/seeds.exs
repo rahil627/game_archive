@@ -34,20 +34,13 @@
 # end
 
 
-# manually test one for now..
-
-# example
-# def build_session_token(user) do
-#   token = :crypto.strong_rand_bytes(@rand_size)
-#   {token, %UserToken{token: token, context: "session", user_id: user.id}}
-# end
 
 defmodule GameArchive.GameMaker do
 
   alias GameArchive.Game
   alias Faker # strange library
 
-
+  # manually test one for now..
   def make_game do
     %Game { # this must be a tuple.. {key: value} NOTE: syntax requires the space
       title: "test",
@@ -66,11 +59,6 @@ defmodule GameArchive.GameMaker do
 
   # generates this sql
   # INSERT INTO "games" ("title","tags","alt_titles","makers","studios","countries","languages","release_year","genres","short_description","tech_tags","inserted_at","updated_at") VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING "id" ["test", ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], ["string 1", "string 2"], 1999, ["string 1", "string 2"], "this is a description", ["string 1", "string 2"], ~U[2024-08-12 09:13:45Z], ~U[2024-08-12 09:13:45Z]]
-
-  # def make_games do # TODO: NOTE: function doesn't need (), but the call does
-  #   # TODO: how to loop..?
-  #   Enum.each(1..100, gen_game())
-  # end
 
   def gen_game do # LOVE the defp syntax!
      %Game { # this must be a tuple.. {key: value} NOTE: syntax requires the space
@@ -122,9 +110,3 @@ end
 
 # testing stuff
 # game2 = Games.create_game() # TODO: what are attrs?
-# TODO: error:
-
-# Repo.insert!(game2)
-
-# Games.create_game() # Repo.insert!(game)
-# Games.update_game(game, )

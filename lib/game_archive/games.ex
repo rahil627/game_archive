@@ -13,8 +13,6 @@ defmodule GameArchive.Games do # TODO: rename this to Archive?
   end
 
   def get_game!(id) do
-    # Repo.one(from g in Game, where: game_id = id) # TODO: select all when no select: ?
-    # Repo.one(Game, id)
     Repo.get!(Game, id)
   end
 
@@ -35,6 +33,7 @@ defmodule GameArchive.Games do # TODO: rename this to Archive?
   end
 
   def change_game(%Game{} = game, attrs \\ %{}) do
+    # TODO: see https://hexdocs.pm/phoenix/contexts.html
     game
     |> Game.changeset(attrs)
   end
