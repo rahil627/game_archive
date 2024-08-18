@@ -33,14 +33,14 @@ defmodule GameArchiveWeb.Router do
     resources "/games", GameController
     # by default, creates all of these:
     # can use :only option to limit it
-    # GET /users => :index
-    # GET /users/new => :new
-    # POST /users => :create
-    # GET /users/:id => :show
-    # GET /users/:id/edit => :edit
-    # PATCH /users/:id => :update
-    # PUT /users/:id => :update
-    # DELETE /users/:id => :delete
+    # GET /games => :index
+    # GET /games/new => :new
+    # POST /games => :create
+    # GET /games/:id => :show
+    # GET /games/:id/edit => :edit
+    # PATCH /games/:id => :update
+    # PUT /games/:id => :update
+    # DELETE /games/:id => :delete
 
     get "/games/:id/:title", GameController, :show # with title slug
 
